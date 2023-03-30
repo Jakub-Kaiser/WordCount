@@ -1,0 +1,2 @@
+Not all words are relevant for counting.
+A list of stop words defines which words not to count
