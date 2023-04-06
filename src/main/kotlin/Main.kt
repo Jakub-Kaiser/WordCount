@@ -1,22 +1,22 @@
 fun main(args: Array<String>) {
-        val text = if (args.isNotEmpty()) {
-            readFile(args[0])
-        } else {
-            print("Enter text: ")
-            readln()
-        }
-        println("Number of words: ${countWords(text)}")
+    val text = if (args.isNotEmpty()) {
+        readFileToString(args[0])
+    } else {
+        print("Enter text: ")
+        readln()
+    }
+    println("Number of words: ${countWords(text, "stopwords.txt")}")
 }
 
-fun countWords(text: String): Int {
+fun countWords(text: String, stopWordsFile: String): Int {
     if (text == "") return 0
-    val words = text.split("\\s+".toRegex())
-    val stopWords = object {}.javaClass.getResourceAsStream("stopwords.txt")?.bufferedReader()?.readLines()
+    val words = "\\b[a-zA-Z]+\\b".toRegex().findAll(text).map { it.value }
+    val stopWords = object {}.javaClass.getResourceAsStream(stopWordsFile)?.bufferedReader()?.readLines()
     return stopWords?.let {
-        words.filter { word -> !it.contains(word.lowercase()) }.size
-    } ?: words.size
+        words.filter { word -> !it.contains(word.lowercase()) }.count()
+    } ?: words.count()
 }
 
-fun readFile(fileName: String): String {
+fun readFileToString(fileName: String): String {
     return object {}.javaClass.getResource("/$fileName")?.readText() ?: ""
 }

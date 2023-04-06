@@ -10,11 +10,10 @@ import java.io.PrintStream
 class MainKtTest {
     @ParameterizedTest
     @CsvSource(
-        "mytext.txt, 17",
+        "mytext.txt, 16",
         "non-existent.txt, 0",
         "threeLines.txt, 3",
         "emptyFile.txt, 0",
-
     )
     fun testMainFileInput(fileName: String, expected: Int) {
         val outContent = ByteArrayOutputStream()
@@ -26,12 +25,16 @@ class MainKtTest {
     @ParameterizedTest
     @CsvSource(
         "Two words; 2",
-        "With double  space?; 3",
+        "With double  space??; 3",
+        "With one-dash; 3",
         "With a-dash; 2",
         "With one\ttabulator; 3",
-        "Process finished with exit code 0; 6",
+        "Process finished with exit code 0; 5",
         "The two words; 2",
         "On and off are ignored; 3",
+        "Ju5t two words; 2",
+        "On3 word ; 1",
+        "First sentence. Second sentence.; 4",
         delimiter = ';'
     )
     fun testMainUserInput(input: String, expected: Int) {
