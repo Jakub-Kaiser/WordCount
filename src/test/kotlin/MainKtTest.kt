@@ -1,19 +1,17 @@
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
-import java.io.PrintStream
+import java.io.*
 
 class MainKtTest {
+
     @ParameterizedTest
     @CsvSource(
-        "mytext.txt, 16",
-        "non-existent.txt, 0",
-        "threeLines.txt, 3",
-        "emptyFile.txt, 0",
+        "src/test/resources/twoWords.txt, 2",
+        "src/test/resources/mytext.txt, 16",
+        "src/test/resources/non-existent.txt, 0",
+        "src/test/resources/threeLines.txt, 3",
+        "src/test/resources/emptyFile.txt, 0",
     )
     fun testMainFileInput(fileName: String, expected: Int) {
         val outContent = ByteArrayOutputStream()

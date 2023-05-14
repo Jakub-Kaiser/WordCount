@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
-import java.nio.charset.StandardCharsets
 import java.util.*
 
 
@@ -24,22 +23,34 @@ class UnitTests {
         delimiter = ';'
     )
     fun testCountWords(input: String, expected: Int) {
-        val result = countWords(input, "stopwords.txt")
+        val result = countWords(input, "src/test/resources/stopwords.txt")
         assertEquals(expected, result)
     }
 
     @Test
     fun testCountWordsEmptyString() {
-        val result = countWords("","stopwords.txt")
+        val result = countWords("","src/test/resources/stopwords.txt")
         val expected = 0
         assertEquals(expected, result)
     }
 
+    @ParameterizedTest
+    @CsvSource(
+        "src/test/resources/twoWords.txt, the two words",
+    )
+    fun testReadFile(fileName: String, expected: String) {
+        val result = readFileToString(fileName)
+        assertEquals(expected, result)
+    }
+
     @Test
-    @DisplayName("Test reading file with 3 lines, 1 word each")
     fun testReadFileThreeLines() {
-        val result = readFileToString("threeLines.txt")
-        assertEquals("One\r\nTwo\r\nThree", result)
+        val expected = """One
+            |Two
+            |Three
+        """.trimMargin().replace("\n", "\r\n")
+        val actual = readFileToString("src/test/resources/threeLines.txt")
+        assertEquals(expected, actual)
     }
 
     @Test
@@ -54,5 +65,7 @@ class UnitTests {
         val result = countWords("The three words","non-existent")
         assertEquals(3, result)
     }
+
+
 
 }
