@@ -7,11 +7,12 @@ class MainKtTest {
 
     @ParameterizedTest
     @CsvSource(
-        "src/test/resources/twoWords.txt, 2",
-        "src/test/resources/mytext.txt, 16",
-        "src/test/resources/non-existent.txt, 0",
-        "src/test/resources/threeLines.txt, 3",
-        "src/test/resources/emptyFile.txt, 0",
+        "../../test/resources/twoWords.txt, 2",
+        "../../test/resources/twoWords.txt, 2",
+        "../../test/resources/mytext.txt, 16",
+        "../../test/resources/non-existent.txt, 0",
+        "../../test/resources/threeLines.txt, 3",
+        "../../test/resources/emptyFile.txt, 0",
     )
     fun testMainFileInput(fileName: String, expected: Int) {
         val outContent = ByteArrayOutputStream()

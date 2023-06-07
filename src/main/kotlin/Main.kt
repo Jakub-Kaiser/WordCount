@@ -15,7 +15,7 @@ fun countWords(text: String, stopWordsFile: String): Int {
     if (text == "") return 0
     val words = "\\b[a-zA-Z]+\\b".toRegex().findAll(text).map { it.value }
     val stopWords = try {
-        File(stopWordsFile).readLines()
+        File("src/main/resources/$stopWordsFile").readLines()
     } catch (e: FileNotFoundException) {
         null
     }
@@ -26,7 +26,7 @@ fun countWords(text: String, stopWordsFile: String): Int {
 
 fun readFileToString(fileName: String): String {
     return try {
-        File(fileName).readText()
+        File("src/main/resources/$fileName").readText()
     } catch (e: FileNotFoundException) {
         ""
     }
