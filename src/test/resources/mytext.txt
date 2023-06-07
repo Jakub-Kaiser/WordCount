@@ -1,2 +1,2 @@
 Not all words are relevant for counting.
-A list of stop words defines which words not to count
+A list of stop words defines wh1ch words not to count.

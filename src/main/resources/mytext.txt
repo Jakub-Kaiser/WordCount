@@ -1,3 +1,2 @@
-Mary had
-a little
-lamb
+Not all words are relevant for counting.
+A list of stop words defines wh1ch words not to count.
