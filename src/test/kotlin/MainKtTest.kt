@@ -18,7 +18,7 @@ class MainKtTest {
         val outContent = ByteArrayOutputStream()
         System.setOut(PrintStream(outContent))
         main(arrayOf(fileName))
-        assertTrue(outContent.toString().contains("Number of words: $expected"))
+        assertTrue(outContent.toString() == ("Number of words: $expected\r\n"))
     }
 
     @ParameterizedTest
@@ -42,7 +42,8 @@ class MainKtTest {
         val inputStream: InputStream = ByteArrayInputStream(input.toByteArray())
         System.setIn(inputStream)
         main(emptyArray())
-        assertTrue(outContent.toString().contains("Number of words: $expected"))
+        val result = outContent.toString().substringAfter("Enter text: ")
+        assertTrue(result == ("Number of words: $expected\r\n"))
     }
 
 }
